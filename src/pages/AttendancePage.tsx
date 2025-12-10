@@ -114,18 +114,18 @@ export default function AttendancePage() {
         }
       />
 
-      <Tabs defaultValue="attendance" className="space-y-6">
-        <TabsList className="bg-muted/50">
-          <TabsTrigger value="attendance">Attendance Records</TabsTrigger>
-          <TabsTrigger value="pending" className="relative">
-            Pending Requests
+      <Tabs defaultValue="attendance" className="space-y-4 md:space-y-6">
+        <TabsList className="bg-muted/50 w-full flex-wrap h-auto p-1 gap-1">
+          <TabsTrigger value="attendance" className="text-xs sm:text-sm flex-1 sm:flex-none">Attendance</TabsTrigger>
+          <TabsTrigger value="pending" className="relative text-xs sm:text-sm flex-1 sm:flex-none">
+            Pending
             {pendingRequests.length > 0 && (
-              <span className="ml-2 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs flex items-center justify-center">
+              <span className="ml-1 h-4 w-4 rounded-full bg-primary text-primary-foreground text-[10px] flex items-center justify-center">
                 {pendingRequests.length}
               </span>
             )}
           </TabsTrigger>
-          <TabsTrigger value="all">All Requests</TabsTrigger>
+          <TabsTrigger value="all" className="text-xs sm:text-sm flex-1 sm:flex-none">All</TabsTrigger>
         </TabsList>
 
         <TabsContent value="attendance" className="space-y-4">
@@ -133,10 +133,10 @@ export default function AttendancePage() {
             value={search}
             onChange={setSearch}
             placeholder="Search employees..."
-            className="max-w-md"
+            className="w-full sm:max-w-md"
           />
 
-          <div className="grid gap-4 md:grid-cols-2">
+          <div className="grid gap-3 sm:gap-4 md:grid-cols-2">
             {filteredAttendance.map((record, index) => {
               const presentCount = record.attendance.filter(a => a.status === 'Present').length;
               const totalDays = record.attendance.length;
@@ -260,13 +260,13 @@ export default function AttendancePage() {
         </TabsContent>
 
         <TabsContent value="all" className="space-y-4">
-          <div className="overflow-hidden rounded-xl border bg-card">
+          <div className="overflow-x-auto rounded-xl border bg-card">
             <table className="data-table">
               <thead>
                 <tr>
                   <th>Employee</th>
-                  <th>Date</th>
-                  <th>Reason</th>
+                  <th className="hidden sm:table-cell">Date</th>
+                  <th className="hidden md:table-cell">Reason</th>
                   <th>Status</th>
                 </tr>
               </thead>
@@ -278,17 +278,20 @@ export default function AttendancePage() {
                     style={{ animationDelay: `${index * 30}ms` }}
                   >
                     <td>
-                      <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <div className="flex items-center gap-2">
+                        <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                           <span className="text-xs font-semibold text-primary">
                             {request.employeeName.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
-                        <span className="font-medium">{request.employeeName}</span>
+                        <div className="min-w-0">
+                          <span className="font-medium text-sm block truncate">{request.employeeName}</span>
+                          <span className="text-xs text-muted-foreground sm:hidden">{new Date(request.date).toLocaleDateString()}</span>
+                        </div>
                       </div>
                     </td>
-                    <td>{new Date(request.date).toLocaleDateString()}</td>
-                    <td>{request.reason}</td>
+                    <td className="hidden sm:table-cell text-sm">{new Date(request.date).toLocaleDateString()}</td>
+                    <td className="hidden md:table-cell text-sm">{request.reason}</td>
                     <td><StatusBadge status={request.status} /></td>
                   </tr>
                 ))}

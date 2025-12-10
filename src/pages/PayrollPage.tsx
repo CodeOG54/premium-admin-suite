@@ -190,27 +190,27 @@ export default function PayrollPage() {
       />
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
+      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4 mb-6">
         <StatCard
-          title="Total Payroll"
+          title="Total"
           value={`R${stats.totalPayroll.toLocaleString()}`}
           icon={DollarSign}
           className="stagger-1"
         />
         <StatCard
-          title="Average Salary"
+          title="Average"
           value={`R${Math.round(stats.avgSalary).toLocaleString()}`}
           icon={Receipt}
           className="stagger-2"
         />
         <StatCard
-          title="Total Hours"
+          title="Hours"
           value={stats.totalHours.toLocaleString()}
           icon={Clock}
           className="stagger-3"
         />
         <StatCard
-          title="Total Deductions"
+          title="Deductions"
           value={`R${stats.totalDeductions.toLocaleString()}`}
           icon={Minus}
           className="stagger-4"
@@ -222,7 +222,7 @@ export default function PayrollPage() {
         value={search}
         onChange={setSearch}
         placeholder="Search employees..."
-        className="max-w-md mb-6"
+        className="w-full sm:max-w-md mb-4"
       />
 
       {/* Payroll Table */}
@@ -232,11 +232,11 @@ export default function PayrollPage() {
             <thead>
               <tr>
                 <th>Employee</th>
-                <th>Department</th>
-                <th className="text-right">Base Salary</th>
-                <th className="text-right">Hours</th>
-                <th className="text-right">Deductions</th>
-                <th className="text-right">Final Salary</th>
+                <th className="hidden sm:table-cell">Dept</th>
+                <th className="text-right hidden md:table-cell">Base</th>
+                <th className="text-right hidden lg:table-cell">Hours</th>
+                <th className="text-right hidden lg:table-cell">Deduct</th>
+                <th className="text-right">Final</th>
                 <th className="text-right">Actions</th>
               </tr>
             </thead>
@@ -248,42 +248,42 @@ export default function PayrollPage() {
                   style={{ animationDelay: `${index * 30}ms` }}
                 >
                   <td>
-                    <div className="flex items-center gap-3">
-                      <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                    <div className="flex items-center gap-2">
+                      <div className="h-7 w-7 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                         <span className="text-xs font-semibold text-primary">
                           {row.name.split(' ').map(n => n[0]).join('')}
                         </span>
                       </div>
-                      <div>
-                        <p className="font-medium">{row.name}</p>
-                        <p className="text-xs text-muted-foreground">{row.position}</p>
+                      <div className="min-w-0">
+                        <p className="font-medium text-sm truncate">{row.name}</p>
+                        <p className="text-xs text-muted-foreground truncate sm:hidden">{row.department}</p>
                       </div>
                     </div>
                   </td>
-                  <td>{row.department}</td>
-                  <td className="text-right">R{row.baseSalary.toLocaleString()}</td>
-                  <td className="text-right">{row.hoursWorked}</td>
-                  <td className="text-right text-destructive">
+                  <td className="hidden sm:table-cell text-sm">{row.department}</td>
+                  <td className="text-right hidden md:table-cell text-sm">R{row.baseSalary.toLocaleString()}</td>
+                  <td className="text-right hidden lg:table-cell text-sm">{row.hoursWorked}</td>
+                  <td className="text-right text-destructive hidden lg:table-cell text-sm">
                     -R{(row.baseSalary - row.finalSalary).toLocaleString()}
                   </td>
-                  <td className="text-right font-semibold">R{row.finalSalary.toLocaleString()}</td>
+                  <td className="text-right font-semibold text-sm">R{row.finalSalary.toLocaleString()}</td>
                   <td className="text-right">
                     <div className="flex items-center justify-end gap-1">
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8"
+                        className="h-7 w-7"
                         onClick={() => setSelectedPayslip(row)}
                       >
-                        <Eye className="h-4 w-4" />
+                        <Eye className="h-3.5 w-3.5" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8"
+                        className="h-7 w-7"
                         onClick={() => generatePayslipPDF(row)}
                       >
-                        <FileDown className="h-4 w-4" />
+                        <FileDown className="h-3.5 w-3.5" />
                       </Button>
                     </div>
                   </td>

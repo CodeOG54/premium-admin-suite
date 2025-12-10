@@ -87,28 +87,28 @@ export default function Dashboard() {
       />
 
       {/* Stats Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-8">
+      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4 mb-6 md:mb-8">
         <StatCard
-          title="Total Employees"
+          title="Employees"
           value={stats.totalEmployees}
           icon={Users}
           trend={{ value: 12, isPositive: true }}
           className="stagger-1"
         />
         <StatCard
-          title="Total Payroll"
+          title="Payroll"
           value={`R${stats.totalPayroll.toLocaleString()}`}
           icon={DollarSign}
           className="stagger-2"
         />
         <StatCard
-          title="Pending Leaves"
+          title="Pending"
           value={stats.pendingLeaves}
           icon={Clock}
           className="stagger-3"
         />
         <StatCard
-          title="Attendance Rate"
+          title="Attendance"
           value={`${stats.attendanceRate}%`}
           icon={CheckCircle2}
           trend={{ value: 2.5, isPositive: true }}
@@ -117,36 +117,42 @@ export default function Dashboard() {
       </div>
 
       {/* Charts Row */}
-      <div className="grid gap-6 lg:grid-cols-2 mb-8">
+      <div className="grid gap-4 md:gap-6 lg:grid-cols-2 mb-6 md:mb-8">
         {/* Average Salary by Department */}
-        <Card className="card-elevated animate-fade-in">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <TrendingUp className="h-5 w-5 text-primary" />
-              Average Salary by Department
+        <Card className="card-elevated animate-fade-in overflow-hidden">
+          <CardHeader className="pb-2 md:pb-4">
+            <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+              <TrendingUp className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0" />
+              <span className="truncate">Avg Salary by Dept</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="h-[300px]">
+          <CardContent className="p-2 md:p-6 pt-0">
+            <div className="h-[250px] md:h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={salaryData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <BarChart data={salaryData} margin={{ top: 10, right: 10, left: -10, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" className="stroke-border" />
                   <XAxis 
                     dataKey="name" 
-                    tick={{ fontSize: 12 }}
+                    tick={{ fontSize: 10 }}
                     className="text-muted-foreground"
+                    interval={0}
+                    angle={-45}
+                    textAnchor="end"
+                    height={60}
                   />
                   <YAxis 
-                    tick={{ fontSize: 12 }}
+                    tick={{ fontSize: 10 }}
                     tickFormatter={(value) => `R${(value / 1000).toFixed(0)}k`}
                     className="text-muted-foreground"
+                    width={50}
                   />
                   <Tooltip 
                     formatter={(value: number) => [`R${value.toLocaleString()}`, 'Average']}
                     contentStyle={{
                       backgroundColor: 'hsl(var(--card))',
                       border: '1px solid hsl(var(--border))',
-                      borderRadius: '8px'
+                      borderRadius: '8px',
+                      fontSize: '12px'
                     }}
                   />
                   <Bar 
@@ -161,24 +167,24 @@ export default function Dashboard() {
         </Card>
 
         {/* Department Distribution */}
-        <Card className="card-elevated animate-fade-in">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-lg">
-              <Users className="h-5 w-5 text-primary" />
-              Department Distribution
+        <Card className="card-elevated animate-fade-in overflow-hidden">
+          <CardHeader className="pb-2 md:pb-4">
+            <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+              <Users className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0" />
+              <span className="truncate">Department Distribution</span>
             </CardTitle>
           </CardHeader>
-          <CardContent>
-            <div className="h-[300px]">
+          <CardContent className="p-2 md:p-6 pt-0">
+            <div className="h-[250px] md:h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                   <Pie
                     data={departmentData}
                     cx="50%"
                     cy="50%"
-                    outerRadius={100}
+                    outerRadius={70}
                     dataKey="value"
-                    label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                    label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
                     labelLine={false}
                   >
                     {departmentData.map((_, index) => (
@@ -189,8 +195,14 @@ export default function Dashboard() {
                     contentStyle={{
                       backgroundColor: 'hsl(var(--card))',
                       border: '1px solid hsl(var(--border))',
-                      borderRadius: '8px'
+                      borderRadius: '8px',
+                      fontSize: '12px'
                     }}
+                  />
+                  <Legend 
+                    wrapperStyle={{ fontSize: '11px' }}
+                    layout="horizontal"
+                    align="center"
                   />
                 </PieChart>
               </ResponsiveContainer>
@@ -200,37 +212,37 @@ export default function Dashboard() {
       </div>
 
       {/* Recent Leave Requests */}
-      <Card className="card-elevated animate-fade-in">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-lg">
-            <Calendar className="h-5 w-5 text-primary" />
+      <Card className="card-elevated animate-fade-in overflow-hidden">
+        <CardHeader className="pb-2 md:pb-4">
+          <CardTitle className="flex items-center gap-2 text-base md:text-lg">
+            <Calendar className="h-4 w-4 md:h-5 md:w-5 text-primary shrink-0" />
             Recent Leave Requests
           </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
+        <CardContent className="p-3 md:p-6 pt-0">
+          <div className="space-y-3">
             {recentLeaveRequests.length === 0 ? (
-              <p className="text-center text-muted-foreground py-8">No leave requests found</p>
+              <p className="text-center text-muted-foreground py-8 text-sm">No leave requests found</p>
             ) : (
               recentLeaveRequests.map((request, index) => (
                 <div 
                   key={request.id} 
-                  className="flex items-center justify-between p-4 rounded-lg bg-muted/30 border border-border/50 animate-fade-in"
+                  className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 rounded-lg bg-muted/30 border border-border/50 animate-fade-in"
                   style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="flex items-center gap-4">
-                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <span className="text-sm font-semibold text-primary">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                      <span className="text-xs md:text-sm font-semibold text-primary">
                         {request.employeeName.split(' ').map(n => n[0]).join('')}
                       </span>
                     </div>
-                    <div>
-                      <p className="font-medium text-foreground">{request.employeeName}</p>
-                      <p className="text-sm text-muted-foreground">{request.reason}</p>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium text-foreground text-sm truncate">{request.employeeName}</p>
+                      <p className="text-xs text-muted-foreground truncate">{request.reason}</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <span className="text-sm text-muted-foreground hidden sm:block">
+                  <div className="flex items-center gap-2 ml-11 sm:ml-0">
+                    <span className="text-xs text-muted-foreground">
                       {new Date(request.date).toLocaleDateString()}
                     </span>
                     <StatusBadge status={request.status} />

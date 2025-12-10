@@ -119,15 +119,23 @@
 
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     font-feature-settings: "rlig" 1, "calt" 1;
+    overflow-x: hidden;
+    min-width: 0;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-display font-semibold tracking-tight;
+  }
+
+  #root {
+    overflow-x: hidden;
+    min-width: 0;
   }
 }
 
@@ -157,18 +165,24 @@
   /* Table Styles */
   .data-table {
     @apply w-full text-sm;
+    min-width: 600px;
   }
 
   .data-table th {
-    @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-muted/50;
+    @apply px-3 py-3 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground bg-muted/50 whitespace-nowrap;
   }
 
   .data-table td {
-    @apply px-4 py-4 text-foreground;
+    @apply px-3 py-3 text-foreground;
   }
 
   .data-table tr {
     @apply border-b border-border/50 transition-colors hover:bg-muted/30;
+  }
+
+  /* Mobile table container */
+  .table-container {
+    @apply w-full overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0;
   }
 
   /* Status Badges */

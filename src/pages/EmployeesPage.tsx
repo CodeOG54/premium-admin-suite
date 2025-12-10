@@ -145,19 +145,19 @@ export default function EmployeesPage() {
       />
 
       {/* Filters */}
-      <div className="flex flex-col sm:flex-row gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row gap-3 mb-4 md:mb-6">
         <SearchInput
           value={search}
           onChange={setSearch}
           placeholder="Search employees..."
-          className="flex-1 max-w-md"
+          className="flex-1 w-full sm:max-w-md"
         />
         <Select value={deptFilter} onValueChange={setDeptFilter}>
-          <SelectTrigger className="w-full sm:w-48">
+          <SelectTrigger className="w-full sm:w-40">
             <SelectValue placeholder="Department" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="all">All Departments</SelectItem>
+            <SelectItem value="all">All Depts</SelectItem>
             {departments.map(dept => (
               <SelectItem key={dept} value={dept}>{dept}</SelectItem>
             ))}
@@ -166,65 +166,65 @@ export default function EmployeesPage() {
       </div>
 
       {/* Employee Grid */}
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-3 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {filteredEmployees.map((employee, index) => (
           <Card 
             key={employee.employeeId} 
             className="card-interactive animate-fade-in"
             style={{ animationDelay: `${index * 50}ms` }}
           >
-            <CardContent className="p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <span className="text-lg font-semibold text-primary">
+            <CardContent className="p-4 md:p-6">
+              <div className="flex items-start justify-between gap-2 mb-3 md:mb-4">
+                <div className="flex items-center gap-2 md:gap-3 min-w-0 flex-1">
+                  <div className="h-10 w-10 md:h-12 md:w-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span className="text-sm md:text-lg font-semibold text-primary">
                       {employee.name.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
-                  <div className="min-w-0">
-                    <h3 className="font-semibold text-foreground truncate">{employee.name}</h3>
-                    <p className="text-sm text-muted-foreground truncate">{employee.position}</p>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold text-foreground truncate text-sm md:text-base">{employee.name}</h3>
+                    <p className="text-xs md:text-sm text-muted-foreground truncate">{employee.position}</p>
                   </div>
                 </div>
-                <div className="flex gap-1 shrink-0">
+                <div className="flex gap-0.5 shrink-0">
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8"
+                    className="h-7 w-7 md:h-8 md:w-8"
                     onClick={() => handleEditClick(employee)}
                   >
-                    <Pencil className="h-4 w-4" />
+                    <Pencil className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </Button>
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-destructive hover:text-destructive"
+                    className="h-7 w-7 md:h-8 md:w-8 text-destructive hover:text-destructive"
                     onClick={() => setDeleteId(employee.employeeId)}
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </Button>
                 </div>
               </div>
 
-              <div className="space-y-2 text-sm">
+              <div className="space-y-1.5 text-xs md:text-sm">
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <Building className="h-4 w-4 shrink-0" />
+                  <Building className="h-3.5 w-3.5 md:h-4 md:w-4 shrink-0" />
                   <span className="truncate">{employee.department}</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <Mail className="h-4 w-4 shrink-0" />
+                  <Mail className="h-3.5 w-3.5 md:h-4 md:w-4 shrink-0" />
                   <span className="truncate">{employee.contact}</span>
                 </div>
                 <div className="flex items-center gap-2 text-muted-foreground">
-                  <Briefcase className="h-4 w-4 shrink-0" />
+                  <Briefcase className="h-3.5 w-3.5 md:h-4 md:w-4 shrink-0" />
                   <span className="truncate">{employee.employmentHistory}</span>
                 </div>
               </div>
 
-              <div className="mt-4 pt-4 border-t border-border">
-                <p className="text-lg font-semibold text-foreground">
+              <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-border">
+                <p className="text-base md:text-lg font-semibold text-foreground">
                   R{employee.salary.toLocaleString()}
-                  <span className="text-sm font-normal text-muted-foreground">/month</span>
+                  <span className="text-xs md:text-sm font-normal text-muted-foreground">/month</span>
                 </p>
               </div>
             </CardContent>
