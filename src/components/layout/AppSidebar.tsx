@@ -43,36 +43,59 @@ export function AppSidebar() {
 
   return (
     <Sidebar 
-      className="border-r border-sidebar-border"
+      className="border-r border-sidebar-border transition-all duration-300 ease-in-out"
       collapsible="icon"
     >
+<<<<<<< HEAD
       <SidebarHeader className={collapsed ? "px-2 py-4" : "p-4"}>
+=======
+      <SidebarHeader className={cn(
+        "p-4 transition-all duration-300 ease-in-out",
+        collapsed && "px-2 py-4"
+      )}>
+>>>>>>> 46eb2fc31c0d2a96a9f6398870cdfc0267ee5547
         <div className={cn(
-          "flex items-center gap-3 transition-all duration-300",
+          "flex items-center gap-3 transition-all duration-300 ease-in-out",
           collapsed && "justify-center"
         )}>
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-glow">
-            <Building2 className="h-5 w-5" />
+          <div className={cn(
+            "flex items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-glow shrink-0 transition-all duration-300 ease-in-out",
+            collapsed ? "h-9 w-9" : "h-10 w-10"
+          )}>
+            <Building2 className={cn(
+              "transition-all duration-300 ease-in-out",
+              collapsed ? "h-4 w-4" : "h-5 w-5"
+            )} />
           </div>
           {!collapsed && (
-            <div className="animate-fade-in">
-              <h1 className="font-display text-lg font-bold text-sidebar-primary-foreground">
+            <div className="animate-fade-in overflow-hidden">
+              <h1 className="font-display text-lg font-bold text-sidebar-primary-foreground whitespace-nowrap">
                 ModernTech
               </h1>
-              <p className="text-xs text-sidebar-foreground/60">HR Solutions</p>
+              <p className="text-xs text-sidebar-foreground/60 whitespace-nowrap">HR Solutions</p>
             </div>
           )}
         </div>
       </SidebarHeader>
 
+<<<<<<< HEAD
       <SidebarContent className={collapsed ? "px-2" : "px-3"}>
+=======
+      <SidebarContent className={cn(
+        "transition-all duration-300 ease-in-out",
+        collapsed ? "px-1" : "px-3"
+      )}>
+>>>>>>> 46eb2fc31c0d2a96a9f6398870cdfc0267ee5547
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className={cn(collapsed && "items-center")}>
               {menuItems.map((item) => {
                 const isActive = location.pathname === item.url;
                 return (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem key={item.title} className={cn(
+                    "transition-all duration-300 ease-in-out",
+                    collapsed && "w-full flex justify-center"
+                  )}>
                     <SidebarMenuButton
                       asChild
                       tooltip={item.title}
@@ -81,16 +104,17 @@ export function AppSidebar() {
                       <NavLink
                         to={item.url}
                         className={cn(
-                          "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sidebar-foreground transition-all duration-200",
-                          "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                          "flex items-center rounded-lg text-sidebar-foreground transition-all duration-300 ease-in-out",
+                          collapsed ? "justify-center w-9 h-9 p-0" : "gap-3 px-3 py-2.5 w-full",
+                          "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground hover:scale-105",
                           isActive && "bg-sidebar-accent text-sidebar-primary font-medium shadow-sm"
                         )}
                       >
                         <item.icon className={cn(
-                          "h-5 w-5 shrink-0 transition-colors",
+                          "h-5 w-5 shrink-0 transition-all duration-300 ease-in-out",
                           isActive && "text-sidebar-primary"
                         )} />
-                        {!collapsed && <span>{item.title}</span>}
+                        {!collapsed && <span className="whitespace-nowrap">{item.title}</span>}
                       </NavLink>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -101,7 +125,14 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
+<<<<<<< HEAD
       <SidebarFooter className={collapsed ? "px-2 py-3" : "p-4"}>
+=======
+      <SidebarFooter className={cn(
+        "p-4 transition-all duration-300 ease-in-out",
+        collapsed && "px-2 py-4"
+      )}>
+>>>>>>> 46eb2fc31c0d2a96a9f6398870cdfc0267ee5547
         <Separator className="mb-4 bg-sidebar-border" />
         
         {!collapsed && (
@@ -113,14 +144,14 @@ export function AppSidebar() {
         )}
 
         <div className={cn(
-          "flex gap-2",
+          "flex gap-2 transition-all duration-300 ease-in-out",
           collapsed ? "flex-col items-center" : "items-center"
         )}>
           <Button
             variant="ghost"
             size="icon"
             onClick={toggleTheme}
-            className="h-9 w-9 shrink-0 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            className="h-9 w-9 shrink-0 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-all duration-300 ease-in-out hover:scale-110"
           >
             {theme === 'dark' ? (
               <Sun className="h-4 w-4" />
@@ -131,16 +162,15 @@ export function AppSidebar() {
           
           <Button
             variant="ghost"
-            size={collapsed ? "icon" : "default"}
+            size="icon"
             onClick={logout}
-            className={cn(
-              "text-sidebar-foreground hover:bg-destructive/20 hover:text-destructive",
-              !collapsed && "flex-1 justify-start"
-            )}
+            className="h-9 w-9 shrink-0 text-sidebar-foreground hover:bg-destructive/20 hover:text-destructive transition-all duration-300 ease-in-out hover:scale-110"
           >
             <LogOut className="h-4 w-4" />
-            {!collapsed && <span className="ml-2">Sign Out</span>}
           </Button>
+          {!collapsed && (
+            <span className="text-sm text-sidebar-foreground ml-1 whitespace-nowrap animate-fade-in">Sign Out</span>
+          )}
         </div>
       </SidebarFooter>
     </Sidebar>
