@@ -16,7 +16,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // Hardcoded admin credentials
 const ADMIN_CREDENTIALS = {
-  username: 'admin',
+  username: 'Admin',
   password: 'admin123'
 };
 
