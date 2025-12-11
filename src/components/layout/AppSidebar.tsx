@@ -46,14 +46,10 @@ export function AppSidebar() {
       className="border-r border-sidebar-border transition-all duration-300 ease-in-out"
       collapsible="icon"
     >
-<<<<<<< HEAD
-      <SidebarHeader className={collapsed ? "px-2 py-4" : "p-4"}>
-=======
       <SidebarHeader className={cn(
         "p-4 transition-all duration-300 ease-in-out",
         collapsed && "px-2 py-4"
       )}>
->>>>>>> 46eb2fc31c0d2a96a9f6398870cdfc0267ee5547
         <div className={cn(
           "flex items-center gap-3 transition-all duration-300 ease-in-out",
           collapsed && "justify-center"
@@ -78,14 +74,10 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
 
-<<<<<<< HEAD
-      <SidebarContent className={collapsed ? "px-2" : "px-3"}>
-=======
       <SidebarContent className={cn(
         "transition-all duration-300 ease-in-out",
         collapsed ? "px-1" : "px-3"
       )}>
->>>>>>> 46eb2fc31c0d2a96a9f6398870cdfc0267ee5547
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu className={cn(collapsed && "items-center")}>
@@ -125,14 +117,10 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-<<<<<<< HEAD
-      <SidebarFooter className={collapsed ? "px-2 py-3" : "p-4"}>
-=======
       <SidebarFooter className={cn(
         "p-4 transition-all duration-300 ease-in-out",
         collapsed && "px-2 py-4"
       )}>
->>>>>>> 46eb2fc31c0d2a96a9f6398870cdfc0267ee5547
         <Separator className="mb-4 bg-sidebar-border" />
         
         {!collapsed && (
