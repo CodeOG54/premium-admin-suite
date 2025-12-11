@@ -46,7 +46,7 @@ export function AppSidebar() {
       className="border-r border-sidebar-border"
       collapsible="icon"
     >
-      <SidebarHeader className="p-4">
+      <SidebarHeader className={collapsed ? "px-2 py-4" : "p-4"}>
         <div className={cn(
           "flex items-center gap-3 transition-all duration-300",
           collapsed && "justify-center"
@@ -65,7 +65,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="px-3">
+      <SidebarContent className={collapsed ? "px-2" : "px-3"}>
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -101,7 +101,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4">
+      <SidebarFooter className={collapsed ? "px-2 py-3" : "p-4"}>
         <Separator className="mb-4 bg-sidebar-border" />
         
         {!collapsed && (
