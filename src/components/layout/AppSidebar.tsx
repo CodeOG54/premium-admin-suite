@@ -46,13 +46,16 @@ export function AppSidebar() {
       className="border-r border-sidebar-border"
       collapsible="icon"
     >
-      <SidebarHeader className="p-4">
+      <SidebarHeader className={cn("p-4", collapsed && "px-2 py-4")}>
         <div className={cn(
           "flex items-center gap-3 transition-all duration-300",
           collapsed && "justify-center"
         )}>
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-glow">
-            <Building2 className="h-5 w-5" />
+          <div className={cn(
+            "flex items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-glow shrink-0",
+            collapsed ? "h-9 w-9" : "h-10 w-10"
+          )}>
+            <Building2 className={cn(collapsed ? "h-4 w-4" : "h-5 w-5")} />
           </div>
           {!collapsed && (
             <div className="animate-fade-in">
@@ -65,7 +68,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="px-3">
+      <SidebarContent className={cn("px-3", collapsed && "px-2")}>
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -81,13 +84,15 @@ export function AppSidebar() {
                       <NavLink
                         to={item.url}
                         className={cn(
-                          "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sidebar-foreground transition-all duration-200",
+                          "flex items-center gap-3 rounded-lg text-sidebar-foreground transition-all duration-200",
+                          collapsed ? "justify-center px-2 py-2.5" : "px-3 py-2.5",
                           "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                           isActive && "bg-sidebar-accent text-sidebar-primary font-medium shadow-sm"
                         )}
                       >
                         <item.icon className={cn(
-                          "h-5 w-5 shrink-0 transition-colors",
+                          "shrink-0 transition-colors",
+                          collapsed ? "h-5 w-5" : "h-5 w-5",
                           isActive && "text-sidebar-primary"
                         )} />
                         {!collapsed && <span>{item.title}</span>}
@@ -101,7 +106,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4">
+      <SidebarFooter className={cn("p-4", collapsed && "px-2 py-4")}>
         <Separator className="mb-4 bg-sidebar-border" />
         
         {!collapsed && (
@@ -131,16 +136,15 @@ export function AppSidebar() {
           
           <Button
             variant="ghost"
-            size={collapsed ? "icon" : "default"}
+            size="icon"
             onClick={logout}
-            className={cn(
-              "text-sidebar-foreground hover:bg-destructive/20 hover:text-destructive",
-              !collapsed && "flex-1 justify-start"
-            )}
+            className="h-9 w-9 shrink-0 text-sidebar-foreground hover:bg-destructive/20 hover:text-destructive"
           >
             <LogOut className="h-4 w-4" />
-            {!collapsed && <span className="ml-2">Sign Out</span>}
           </Button>
+          {!collapsed && (
+            <span className="text-sm text-sidebar-foreground ml-1">Sign Out</span>
+          )}
         </div>
       </SidebarFooter>
     </Sidebar>
