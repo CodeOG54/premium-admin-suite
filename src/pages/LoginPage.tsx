@@ -184,9 +184,9 @@ export default function LoginPage() {
           </form>
           
           <div className="rounded-lg border bg-muted/50 p-4">
-            <p className="text-sm font-medium text-foreground mb-2">Demo Credentials</p>
+            <p className="text-sm font-medium text-foreground mb-2">Credentials</p>
             <div className="space-y-1 text-sm text-muted-foreground">
-              <p>Username: <code className="rounded bg-muted px-1 py-0.5 font-mono text-primary">admin</code></p>
+              <p>Username: <code className="rounded bg-muted px-1 py-0.5 font-mono text-primary">Admin</code></p>
               <p>Password: <code className="rounded bg-muted px-1 py-0.5 font-mono text-primary">admin123</code></p>
             </div>
           </div>
