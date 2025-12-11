@@ -127,7 +127,6 @@ export function AppSidebar() {
           <div className="mb-4 rounded-lg bg-sidebar-accent/50 p-3 animate-fade-in">
             <p className="text-xs text-sidebar-foreground/60">Logged in as</p>
             <p className="font-medium text-sidebar-primary-foreground">{user?.username}</p>
-            <p className="text-xs text-sidebar-foreground/60">{user?.role}</p>
           </div>
         )}
 
