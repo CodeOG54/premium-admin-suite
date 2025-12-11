@@ -68,14 +68,14 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
 
-      <SidebarContent className={cn("px-3", collapsed && "px-2")}>
+      <SidebarContent className={cn(collapsed ? "px-1" : "px-3")}>
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className={cn(collapsed && "items-center")}>
               {menuItems.map((item) => {
                 const isActive = location.pathname === item.url;
                 return (
-                  <SidebarMenuItem key={item.title}>
+                  <SidebarMenuItem key={item.title} className={cn(collapsed && "w-full flex justify-center")}>
                     <SidebarMenuButton
                       asChild
                       tooltip={item.title}
@@ -84,15 +84,14 @@ export function AppSidebar() {
                       <NavLink
                         to={item.url}
                         className={cn(
-                          "flex items-center gap-3 rounded-lg text-sidebar-foreground transition-all duration-200",
-                          collapsed ? "justify-center px-2 py-2.5" : "px-3 py-2.5",
+                          "flex items-center rounded-lg text-sidebar-foreground transition-all duration-200",
+                          collapsed ? "justify-center w-9 h-9 p-0" : "gap-3 px-3 py-2.5 w-full",
                           "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                           isActive && "bg-sidebar-accent text-sidebar-primary font-medium shadow-sm"
                         )}
                       >
                         <item.icon className={cn(
-                          "shrink-0 transition-colors",
-                          collapsed ? "h-5 w-5" : "h-5 w-5",
+                          "h-5 w-5 shrink-0 transition-colors",
                           isActive && "text-sidebar-primary"
                         )} />
                         {!collapsed && <span>{item.title}</span>}
